@@ -22,10 +22,9 @@ const App = () => {
 	const [ballPosition,setBallPosition] = useState({
 		left: "0px",
 		top: "0px",
-		position: "absolute",
 	});
 	const reset = () => {
-		setBallPosition({ left: '0px', top: '0px', position: 'absolute' });
+		setBallPosition({ left: '0px', top: '0px' });
 		setShowStartButton(true);
 		setRenderBall(false);
 	};
@@ -61,7 +60,7 @@ const App = () => {
 					break;
 			}
 
-			setBallPosition({ left: xRef.current, top: yRef.current, position: 'absolute' });	
+			setBallPosition({ left: xRef.current, top: yRef.current });	
 
 		});
 		
