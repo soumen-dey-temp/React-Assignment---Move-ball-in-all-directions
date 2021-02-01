@@ -3,7 +3,6 @@
     height:50%;
     margin: auto;
   margin-top: 250px;
-  background-color: green;
     
 }
 body html .root {
@@ -11,20 +10,6 @@ body html .root {
 }
 @import url("https://fonts.googleapis.com/css2?family=Fredoka+One&family=Roboto:ital,wght@1,100&display=swap");
 
-.ballProvider{
-	font-family: "Fredoka One", cursive;
-  
-	  background-color: #202124;
-  color: white;
-  height: 30px;
-  font-size: 15px;
-  border-radius:8px;
-  border: none;
-  width: 195px;
-  margin: 15px;
-  
-
-}
 .reset{
 	font-family: "Fredoka One", cursive;
   
@@ -61,5 +46,4 @@ body html .root {
     height: 50px;
     width: 50px;
     border-radius: 25px;
-    display: inline-block;
 }

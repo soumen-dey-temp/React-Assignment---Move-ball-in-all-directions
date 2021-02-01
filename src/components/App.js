@@ -1,77 +1,67 @@
-import React, { Component, useEffect, useState, useRef } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../styles/App.css";
 
 const App = () => {
 	const [renderBall, setRenderBall] = useState(false);
-	const [showStartButton, setShowStartButton] = useState(true);
-	
 	const [x, setX] = useState(0);
-	const xRef = useRef(x);
-	const setXRef = data => {
-		xRef.current = data;
-		setX(data);
-	}
-
 	const [y, setY] = useState(0);
-	const yRef = useRef(y);
-	const setYRef = data => {
-		yRef.current = data;
-		setY(data);
-	}
-
 	const [ballPosition,setBallPosition] = useState({
 		left: "0px",
 		top: "0px",
 	});
-	const reset = () => {
-		setBallPosition({ left: '0px', top: '0px' });
-		setShowStartButton(true);
-		setRenderBall(false);
-	};
-	const renderChoice = () => {};
 
-	const start = (event) => {
-		event.preventDefault();
+	const reset = () => {
+		setRenderBall(false);
+		updateXY(0,0);
+	};
+
+	const start = () => {
 		setRenderBall(true);
-		setShowStartButton(false);
 	}
 
-	useEffect(() => {
+	const renderChoice = () => {
+		return renderBall ? 
+			(
+				<div className="ball" style={{
+					position: 'absolute',
+					left: ballPosition.left,
+					top: ballPosition.top
+				}}></div>
+			) : <button onClick={start} className="start">Start</button>;
+	};
 
-		window.addEventListener('keydown', (event) => {
-
-			// right 39
-			// down 40
-			// up 38
-			// left 37
-
-			switch (event.keyCode) {
-				case 37:
-					setXRef(xRef.current - 5);
-					break;
-				case 38:
-					setYRef(yRef.current - 5);
-					break;
-				case 39:
-					setXRef(xRef.current + 5);
-					break;
-				case 40:
-					setYRef(yRef.current + 5);
-					break;
-			}
-
-			setBallPosition({ left: xRef.current, top: yRef.current });	
-
+	const updateXY = (newX,newY) => {
+		setX(newX);
+		setY(newY);
+		setBallPosition({
+			left: newX + 'px',
+			top: newY + 'px'
 		});
-		
-	}, []);
+	}
+
+  useEffect(() => {
+		const kListener = (evt) => {
+
+		if(renderBall) {
+			if(evt.keyCode === 37){
+				updateXY(x-5, y);
+			}else if(evt.keyCode === 38){
+				updateXY(x, y-5);
+			}else if(evt.keyCode === 39){
+				updateXY(x+5, y);
+			}else if(evt.keyCode === 40){
+				updateXY(x, y+5);
+			}
+		}
+	};
+	
+	document.addEventListener("keydown", kListener);
+	
+	return () => document.removeEventListener("keydown", kListener);
+  })
 
 	return (
 		<div className="playground">
-			{showStartButton ? <button onClick={start} className="start">Start</button> : null}
-			{renderBall ? (
-				<div className="ball" style={ballPosition}></div>
-			) : null}
 			<button onClick={reset} className="reset">
 				Reset
 			</button>
