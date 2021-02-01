@@ -69,10 +69,12 @@ const App = () => {
 	return (
 		<div className="playground">
 			{showStartButton ? <button onClick={start} className="start">Start</button> : null}
+			{renderBall ? (
+				<div className="ball" style={ballPosition}></div>
+			) : null}
 			<button onClick={reset} className="reset">
 				Reset
 			</button>
-			{renderBall ? <div className="ball" style={ballPosition}></div> : null}
 			{renderChoice()}
 		</div>
 	);
