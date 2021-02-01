@@ -55,7 +55,7 @@ body html .root {
 .ball{
     background-color: black;
     box-shadow: 0 10px 10px -6px;
-    position: relative;
+    position: absolute;
     right: 0px;
     height: 50px;
     width: 50px;
